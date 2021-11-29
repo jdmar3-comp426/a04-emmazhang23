@@ -46,7 +46,7 @@ app.get("/app/user/:id", (req, res) => {
 app.patch("/app/update/user/:id", (req, res) => {	
 	const stmt = db.prepare("UPDATE userinfo SET user = COALESCE(?,user), pass = COALESCE(?,pass) WHERE id = ?");
 	const info=stmt.run(md5(req.body.pass), req.body.user, req.params.id)
-	res.status(201).json({"message": info.changes+" record updated: ID "+info.lastInsertRowid+ " (200)"},{"id":parseInt(req.params.id), "user":req.body.user+"", "pass":md5(req.body.pass+"")});
+	res.status(201).json({"message": info.changes+" record updated: ID "+info.lastInsertRowid+ " (200)"});
 });
 // DELETE a single user (HTTP method DELETE) at endpoint /app/delete/user/:id
 app.delete("/app/delete/user/:id", (req, res) => {	
