@@ -41,14 +41,14 @@ app.get("/app/user/:id", (req, res) => {
 	const stmt = db.prepare("SELECT * FROM userinfo WHERE id = ?");
 	const info=stmt.run(req.params.id)
 	//res.status(200).json(stmt);
-	res.status(201).json({"id":req.params.id, "user":req.body.user, "pass":md5(req.body.pass)});
+	res.status(201).json({"id":req.params.id, "user":req.body.user, "pass":req.body.pass});
 });
 // UPDATE a single user (HTTP method PATCH) at endpoint /app/update/user/:id
 app.patch("/app/update/user/:id", (req, res) => {	
 	const stmt = db.prepare("UPDATE userinfo SET user = COALESCE(?,user), pass = COALESCE(?,pass) WHERE id = ?");
 	const info=stmt.run(md5(req.body.pass), req.body.user, req.params.id)
 	//res.status(201).json({"message": info.changes+" record updated: ID "+req.params.id+ " (200)"});
-	res.status(201).json({"id":req.params.id, "user":req.body.user, "pass":md5(req.body.pass)});
+	res.status(201).json({"id":req.params.id, "user":req.body.user, "pass":req.body.pass});
 
 });
 // DELETE a single user (HTTP method DELETE) at endpoint /app/delete/user/:id
