@@ -40,7 +40,7 @@ app.get("/app/users", (req, res) => {
 app.get("/app/user/:id", (req, res) => {	
 	const stmt = db.prepare("SELECT * FROM userinfo WHERE id = ?");
 	const info=stmt.get(req.params.id)
-	res.status(200).json({"id":parseInt(req.params.id), "user":req.body.user+"", "pass":md5(req.body.pass+"")});
+	res.status(200).json(stmt);
 });
 
 // John's working example
